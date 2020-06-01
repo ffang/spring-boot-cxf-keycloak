@@ -50,6 +50,6 @@ $ mvn test -Dtest=IntegrationTest
 You can then access the CXF JAXRS endpoint directly from your Web browser, e.g.:
 
 - <http://localhost:8080/services/helloservice/sayHello/FIS>
-Since the CXF JAXRS endpoint is secured by Keycloak, this will redirect request to http://localhost:8180/auth/realms/cxf-jaxrs-keycloak/protocol/openid-connect/auth?response_type=code&client_id=cxf-jaxrs&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fservices%2Fhelloservice%2FsayHello%2FFIS&state=cb216ce0-5422-4b3a-acd3-2b1849c1a239&login=true&scope=openid [Keycloak auth server]
+Since the CXF JAXRS endpoint is secured by Keycloak, this will redirect request to http://localhost:8180/auth/realms/cxf-jaxrs-keycloak/protocol/openid-connect/auth?response_type=code&client_id=cxf-jaxrs&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fservices%2Fhelloservice%2FsayHello%2FFIS&state=cb216ce0-5422-4b3a-acd3-2b1849c1a239&login=true&scope=openid[Keycloak auth server]
 Input admin/passw0rd as username/password will fetch OAuth2 token and redirect to the CXF JAXRS endpoint and the browser
 will display "Hello FIS, Welcome to CXF RS Spring Boot World!!!"
