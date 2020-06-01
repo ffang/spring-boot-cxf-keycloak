@@ -1,8 +1,8 @@
 = Spring-Boot CXF JAXRS Keycloak QuickStart
 
-This example demonstrates how you can use Apache CXF JAXRS with is secured by Keycloak with Spring Boot.
+This example demonstrates how you can use Apache CXF JAXRS with is secured by Keycloak with Spring Boot. 
 
-The quickstart uses Spring Boot to configure a little application that includes a CXF JAXRS endpoint with Swagger enabled, which is secured by Keycloak.
+The quickstart uses Spring Boot to configure a little application that includes a CXF JAXRS endpoint with Swagger enabled, which is secured by Keycloak. Test client will fetch JWT access token from Keycloak using https://tools.ietf.org/html/rfc6749#section-4.3["Resource Owner Password Credentials"] OAuth2 mode and using this token to access the REST endpoint. 
 
 IMPORTANT: This quickstart can run in 1 modes: standalone on your machine.
 
@@ -32,8 +32,24 @@ $ mvn clean package
 ----
 $ mvn spring-boot:run
 ----
+This will start keycloak with pre-defined configuration along with CXF JAXRS SB2 endpoint.
+
+. Run the test:
+
++
+[source,bash,options="nowrap",subs="attributes+"]
+----
+$ mvn test -Dtest=IntegrationTest
+----
+
+. Insight of the test
+  This test contains 2 test cases, demonstrates 2 different scenarios
+   - testRestClientWithKeyCloakToken: this testcase sends a request with correct JWT to CXF JAXRS endpoint and expects a response.
+   - testRestClientWithInvalidKeyCloakToken: this testcase intentionally sends a request with an incorrect JWT to CXF JAXRS endpoint and expects a "HTTP 401 Unauthorized" exception; this can prove CXF JAXRS endpoint is really secured by Keycloak.
 
 You can then access the CXF JAXRS endpoint directly from your Web browser, e.g.:
 
 - <http://localhost:8080/services/helloservice/sayHello/FIS>
+Since the CXF JAXRS endpoint is secured by Keycloak, this will redirect request to http://localhost:8180/auth/realms/cxf-jaxrs-keycloak/protocol/openid-connect/auth?response_type=code&client_id=cxf-jaxrs&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fservices%2Fhelloservice%2FsayHello%2FFIS&state=cb216ce0-5422-4b3a-acd3-2b1849c1a239&login=true&scope=openid [Keycloak auth server]
+Input admin/passw0rd as username/password will fetch OAuth2 token and redirect to the CXF JAXRS endpoint and the browser
 will display "Hello FIS, Welcome to CXF RS Spring Boot World!!!"
