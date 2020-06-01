@@ -129,12 +129,12 @@ public class IntegrationTest {
         throws UnsupportedEncodingException, IOException, ClientProtocolException {
         String accessToken = null;
 
-        try (CloseableHttpClient client = getCloseableHttpClient()) {
+        try (CloseableHttpClient client = HttpClients.custom().build()) {
             // "4.3. Resource Owner Password Credentials Grant"
             // from https://tools.ietf.org/html/rfc6749#section-4.3
             // we use "resource owner" credentials directly to obtain the token
             HttpPost post = new HttpPost(SSO_URL
-                                         + "/auth/realms/camel-soap-rest-bridge/protocol/openid-connect/token");
+                                         + "/auth/realms/cxf-jaxrs-keycloak/protocol/openid-connect/token");
             LinkedList<NameValuePair> params = new LinkedList<>();
             params.add(new BasicNameValuePair(OAuth2Constants.GRANT_TYPE, OAuth2Constants.PASSWORD));
             params.add(new BasicNameValuePair("username", "admin"));
@@ -142,7 +142,7 @@ public class IntegrationTest {
             UrlEncodedFormEntity postData = new UrlEncodedFormEntity(params);
             post.setEntity(postData);
 
-            String basicAuth = BasicAuthHelper.createHeader("camel-bridge",
+            String basicAuth = BasicAuthHelper.createHeader("cxf-jaxrs",
                                                             "f1ec716d-2262-434d-8e98-bf31b6b858d6");
             post.setHeader("Authorization", basicAuth);
             CloseableHttpResponse response = client.execute(post);
@@ -162,19 +162,6 @@ public class IntegrationTest {
     }
 
     
-    /**
-     * Since Openshift self-signed certificate can't have accurate
-     * hostname of the service, we don't check the hostname match in certificate
-     * in the quickstart, and shouldn't use this in production
-     */
-    private CloseableHttpClient getCloseableHttpClient() {
-        if (httpClient != null) {
-            return httpClient;
-        }
-        
-        return HttpClients.custom().setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
-       
-      
-    }
+    
      
 }
