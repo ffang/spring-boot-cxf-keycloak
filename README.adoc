@@ -32,7 +32,7 @@ $ mvn clean package
 ----
 $ mvn spring-boot:run
 ----
-This will start keycloak auth server with pre-defined configuration along with CXF JAXRS SB2 endpoint.
+This will start keycloak auth server with pre-defined configuration(./src/main/resources/keycloak-config/realm-export-new.json) along with CXF JAXRS SB2 endpoint.
 
 . Run the test:
 
