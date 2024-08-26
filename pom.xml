@@ -19,7 +19,7 @@
         <keycloak.version>10.0.1</keycloak.version>
         <fuse.bom.version>7.6.0.fuse-sb2-760028-redhat-00001</fuse.bom.version>
         <keycloak.home>${project.build.directory}/keycloak-${keycloak.version}</keycloak.home>
-        <swagger-ui.version>2.1.0</swagger-ui.version>
+        <swagger-ui.version>3.23.11</swagger-ui.version>
     </properties>
 
     <dependencyManagement>
